@@ -14,3 +14,5 @@ or in the list of previously viewed cities
 ```
 
 ## Credits
+To create the application, I used resources on:
+[OpenWeather](https://openweathermap.org/)
