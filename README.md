@@ -1,7 +1,5 @@
 # weather_for_five_days
 
-# Timed-Programming-Quiz
-
 ![application screenshot](./assets/images/demo.png)
 
 ## Description
