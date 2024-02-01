@@ -11,3 +11,5 @@ fetch(apiURL)
 }).then(function(data){
     console.log(data);
 });
+
+console.log("test");
