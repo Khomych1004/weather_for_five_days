@@ -1,0 +1,8 @@
+#forecast {
+    justify-content: space-between;
+    margin: 0;
+}
+
+#forecast div {
+    padding: 0;
+}
