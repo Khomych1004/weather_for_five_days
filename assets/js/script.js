@@ -19,7 +19,7 @@ fetch(queryURL)
     var forecastHumidity = (data.main.humidity);
 
     var todaysForecastDiv = $("<div>");
-    todaysForecastDiv.css({ "border": "solid black 1px", "background-color": "#0D6EFD", "color": "white" });
+    todaysForecastDiv.css({ "border": "solid black 1px", "padding": "5px", "color": "black" });
 
     // City Name
     var todaysForecastCity = $("<h2>");
