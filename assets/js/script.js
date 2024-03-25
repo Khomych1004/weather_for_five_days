@@ -1,6 +1,7 @@
+// TEST CITY
 var testCity = "London";
 
-
+// Creates tags and fills them with data
 function creatingOneDay(data) {
   $("#today").empty();
   var city = (data.name);
@@ -46,7 +47,7 @@ function creatingOneDay(data) {
   $("#today").append(todaysForecastDiv);
 }
 
-
+//makes an API request and displays the received data on the screen
 getWeatherToDay(testCity)
 
 
