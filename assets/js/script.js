@@ -187,7 +187,6 @@ function buttonOnClick() {
 
 }
 
-
 $(document).ready(() => {
   buttonOnClick()
 });
