@@ -1,59 +1,64 @@
-// TEST CITY
-var testCity = "London";
+var city = '';
+var date = '';
+var icon = '';
+var iconLink = '';
+var temp = '';
+var wind = '';
+var humidity = '';
 
 var numberButtons = 0;
 
 // Creates tags and populates them with today's data
 function creatingOneDay(data) {
   $("#today").empty();
-  var city = (data.name);
-  var date = dayjs.unix(data.dt).format("DD-MM-YYYY");
-  var icon = (data.weather[0].icon);
-  var iconLink = ("https://openweathermap.org/img/wn/" + icon + "@2x.png");
-  var temp = (data.main.temp.toFixed(2));
-  var wind = (data.wind.speed.toFixed(2));
-  var humidity = (data.main.humidity);
+  city = (data.name);
+  date = dayjs.unix(data.dt).format("DD-MM-YYYY");
+  icon = (data.weather[0].icon);
+  iconLink = ("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+  temp = (data.main.temp.toFixed(2));
+  wind = (data.wind.speed.toFixed(2));
+  humidity = (data.main.humidity);
 
-  var todaysForecastDiv = $("<div>");
-  todaysForecastDiv.css({ "border": "solid black 1px", "padding": "5px", "color": "black" });
+  let forecastDiv = $("<div>");
+  forecastDiv.css({ "border": "solid black 1px", "padding": "5px", "color": "black" });
 
   // City
-  var todaysForecastCity = $("<h2>");
-  todaysForecastCity.text(city);
-  todaysForecastDiv.append(todaysForecastCity);
+  let forecastCity = $("<h2>");
+  forecastCity.text(city);
+  forecastDiv.append(forecastCity);
 
   // Date
-  var todaysDate = $("<p>");
-  todaysDate.text("( " + date + " )");
-  todaysForecastDiv.append(todaysDate);
+  let forecasDate = $("<p>");
+  forecasDate.text("( " + date + " )");
+  forecastDiv.append(forecasDate);
 
   // Weather Icon
-  var todaysForecastIcon = $(`<img src="${iconLink}">`);
-  todaysForecastDiv.append(todaysForecastIcon);
+  let forecastIcon = $(`<img src="${iconLink}">`);
+  forecastDiv.append(forecastIcon);
 
   // Temperature
-  var todaysForecastTemp = $("<p>");
-  todaysForecastTemp.text("Temp: " + temp + " °C");
-  todaysForecastDiv.append(todaysForecastTemp);
+  let forecastTemp = $("<p>");
+  forecastTemp.text("Temp: " + temp + " °C");
+  forecastDiv.append(forecastTemp);
 
   // Wind
-  var todaysForecastWind = $("<p>");
-  todaysForecastWind.text("Wind: " + wind + " km/h");
-  todaysForecastDiv.append(todaysForecastWind);
+  let forecastWind = $("<p>");
+  forecastWind.text("Wind: " + wind + " km/h");
+  forecastDiv.append(forecastWind);
 
   // Humidity
-  var todaysForecastHumidity = $("<p>");
-  todaysForecastHumidity.text("Humidity: " + humidity + " %");
-  todaysForecastDiv.append(todaysForecastHumidity);
+  let forecastHumidity = $("<p>");
+  forecastHumidity.text("Humidity: " + humidity + " %");
+  forecastDiv.append(forecastHumidity);
 
-  $("#today").append(todaysForecastDiv);
+  $("#today").append(forecastDiv);
 }
 
 // Creates tags and populates them with data in five days
 function creatingFiveDays(data) {
   $("#forecast").empty();
 
-  var title = $("<h3>");
+  let title = $("<h3>");
   title.addClass("title");
   title.css({
     "font-weight": "bold",
@@ -63,26 +68,26 @@ function creatingFiveDays(data) {
 
   $("#forecast").append(title);
 
-  for (var i = 0; i < data.list.length; i++) {
+  for (let i = 0; i < data.list.length; i++) {
     if (data.list[i].dt_txt.includes("12:00:00")) {
-      var date = dayjs.unix(data.list[i].dt).format("DD-MM-YYYY");
-      var icon = (data.list[i].weather[0].icon);
-      var iconLink = ("https://openweathermap.org/img/wn/" + icon + "@2x.png");
-      var temp = (data.list[i].main.temp.toFixed(2));
-      var wind = (data.list[i].wind.speed.toFixed(2));
-      var humidity = (data.list[i].main.humidity);
+      date = dayjs.unix(data.list[i].dt).format("DD-MM-YYYY");
+      icon = (data.list[i].weather[0].icon);
+      iconLink = ("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+      temp = (data.list[i].main.temp.toFixed(2));
+      wind = (data.list[i].wind.speed.toFixed(2));
+      humidity = (data.list[i].main.humidity);
 
       // 5-day Forecast Grid Layout
-      var grid = $("<div>");
+      let grid = $("<div>");
       grid.addClass("col-sm-12 col-md-12 col-lg-2");
 
       // 5-day Forecast Cards
-      var card = $("<div>");
+      let card = $("<div>");
       card.addClass("card");
       grid.append(card);
 
       // 5-day Forecast Card Body's
-      var cardBody = $("<div>");
+      let cardBody = $("<div>");
       cardBody.addClass("card-body");
       cardBody.css({
         "text-align": "left",
@@ -93,13 +98,13 @@ function creatingFiveDays(data) {
       card.append(cardBody);
 
       // 5-day Forecast Card Title
-      var cardTitle = $("<h6>");
+      let cardTitle = $("<h6>");
       cardTitle.addClass("card-title");
       cardTitle.text("( " + date + " )");
       cardBody.append(cardTitle);
 
       // 5-day Forecast Card Icon
-      var cardIcon = $(`<img src="${iconLink}">`);
+      let cardIcon = $(`<img src="${iconLink}">`);
       cardIcon.css({
         "height": "75px",
         "width": "75px"
@@ -107,17 +112,17 @@ function creatingFiveDays(data) {
       cardBody.append(cardIcon);
 
       // 5-day Forecast Card Temp
-      var cardTemp = $("<p>");
+      let cardTemp = $("<p>");
       cardTemp.text("Temp: " + temp + " °C")
       cardBody.append(cardTemp);
 
       // 5-day Forecast Card Wind
-      var cardWind = $("<p>");
+      let cardWind = $("<p>");
       cardWind.text("Wind: " + wind + " km/h")
       cardBody.append(cardWind);
 
       // 5-day Forecast Card Humidity
-      var cardHumidity = $("<p>");
+      let cardHumidity = $("<p>");
       cardHumidity.text("Humidity: " + humidity + " %")
       cardBody.append(cardHumidity);
 
@@ -129,8 +134,6 @@ function creatingFiveDays(data) {
 // A button is created to re-query the city's weather from history
 function addButton(cityName) {
 
-  // let matches = document.querySelectorAll(".history_btn").length;
-  // console.log(matches)
   if (numberButtons < 10) {
     let btn = $("<button>");
     btn.attr('id', numberButtons);
@@ -180,7 +183,7 @@ function buttonOnClick() {
 
   $("#search-button").on("click", function (event) {
     event.preventDefault();
-    var cityName = $("#search-input").val().trim();
+    let cityName = $("#search-input").val().trim();
     if (cityName !== "") {
 
       getWeather(cityName);
@@ -199,11 +202,12 @@ function buttonOnClick() {
 function loadingFromLS() {
   let historyBtnName;
   for (let i = 0; i < 10; i++) {
-
     historyBtnName = localStorage.getItem(i);
 
     if (historyBtnName != null) {
       addButton(historyBtnName)
+    } else {
+      return;
     }
   }
 }
