@@ -3,6 +3,29 @@
     margin: 0;
 }
 
+#search-input {
+    padding-left: 10px;
+    height: 40px;
+    border: 2px solid #dadada;
+    border-radius: 7px;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
 #forecast div {
     padding: 0;
+}
+
+.input-group {
+    flex-direction: column;
+}
+
+#search-button {
+    background-color: #9ecaed;
+    width: 100%;
+    margin-top: 20px;
 }

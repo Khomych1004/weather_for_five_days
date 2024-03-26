@@ -1,6 +1,8 @@
 // TEST CITY
 var testCity = "London";
 
+var numberButtons = 0;
+
 // Creates tags and populates them with today's data
 function creatingOneDay(data) {
   $("#today").empty();
@@ -45,10 +47,14 @@ function creatingOneDay(data) {
   todaysForecastDiv.append(todaysForecastHumidity);
 
   $("#today").append(todaysForecastDiv);
+
+  addButton(city);
 }
 
 // Creates tags and populates them with data in five days
 function creatingFiveDays(data) {
+  $("#forecast").empty();
+
   var title = $("<h3>");
   title.addClass("title");
   title.css({
@@ -122,9 +128,66 @@ function creatingFiveDays(data) {
   }
 }
 
+// A button is created to re-query the city's weather from history
+function addButton(cityName) {
 
-// Makes a request to the API and displays the received data for today on the screen
-getWeatherToDay(testCity)
+  // let matches = document.querySelectorAll(".history_btn").length;
+  // console.log(matches)
+  if (numberButtons < 10) {
+    let btn = $("<button>");
+    btn.attr('id', numberButtons);
+    btn.addClass("btn btn-secondary col-12 mt-2 previous-search");
+    btn.text(cityName);
 
-// Makes a request to the API and displays the received data for five days on the screen
-getWeatherFiveDays(testCity)
+    btn.on("click", (event) => {
+      event.preventDefault();
+      let historyCityName = $(event.target).text();
+      getWeather(historyCityName);
+    });
+
+    $("#history").append(btn);
+
+    numberButtons++;
+  } else {
+
+    let idBtn = idBtnNext = "";
+    let moveCityName = "";
+
+    for (let i = 1; i < 9; i++) {
+      idBtn = "#" + (i - 1)
+      idBtnNext = "#" + i
+
+      moveCityName = $(idBtnNext).text()
+
+      $(idBtn).text(moveCityName);
+    }
+
+    idBtn = "#" + (numberButtons - 1)
+    $(idBtn).text(cityName);
+  }
+
+}
+
+// Binding a handler for clicking the search button
+function buttonOnClick() {
+
+  $("#search-button").on("click", function (event) {
+    event.preventDefault();
+    var cityName = $("#search-input").val().trim();
+    if (cityName !== "") {
+
+      getWeather(cityName);
+
+      $("#search-input").val('');
+    } else {
+      alert("Please enter a city!");
+      return;
+    }
+  });
+
+}
+
+
+$(document).ready(() => {
+  buttonOnClick()
+});

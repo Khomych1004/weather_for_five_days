@@ -8,12 +8,22 @@ const linkFiveDays = "https://api.openweathermap.org/data/2.5/forecast?q="
 const options = "&mode=json&units=metric&appid="
 
 // Request data for today
-function getWeatherToDay(cityName) {
+function getWeather(cityName) {
     // Query string for today
     const queryURL = linkToDay + cityName + options + apiKey;
 
-    fetch(queryURL).then((response) => { return response.json(); })
-        .then((data) => { creatingOneDay(data); });
+    fetch(queryURL)
+        .then((res) => {
+            if (!res.ok) { throw new Error(res.statusText); }
+
+            return res.json();
+        })
+        .then((data) => {
+            creatingOneDay(data);
+            getWeatherFiveDays(cityName);
+        })
+        .catch((error) => { alert(error + "\nEnter the correct city name") });
+
 }
 
 // Request data for five days
@@ -21,6 +31,9 @@ function getWeatherFiveDays(cityName) {
     // Query line for five days
     const queryURL = linkFiveDays + cityName + options + apiKey;
 
-    fetch(queryURL).then((response) => { return response.json(); })
+    fetch(queryURL)
+        .then((res) => { return res.json(); })
         .then((data) => { creatingFiveDays(data); });
+
+
 }
