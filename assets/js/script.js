@@ -47,8 +47,6 @@ function creatingOneDay(data) {
   todaysForecastDiv.append(todaysForecastHumidity);
 
   $("#today").append(todaysForecastDiv);
-
-  addButton(city);
 }
 
 // Creates tags and populates them with data in five days
@@ -147,23 +145,32 @@ function addButton(cityName) {
 
     $("#history").append(btn);
 
+    localStorage.setItem(numberButtons, cityName);
+
     numberButtons++;
   } else {
 
     let idBtn = idBtnNext = "";
     let moveCityName = "";
+    let key = ""
 
-    for (let i = 1; i < 9; i++) {
+    for (let i = 1; i < 10; i++) {
       idBtn = "#" + (i - 1)
       idBtnNext = "#" + i
 
       moveCityName = $(idBtnNext).text()
 
       $(idBtn).text(moveCityName);
+
+      key = (i - 1)
+      localStorage.setItem(key, moveCityName);
     }
 
     idBtn = "#" + (numberButtons - 1)
     $(idBtn).text(cityName);
+
+    key = (numberButtons - 1)
+    localStorage.setItem(key, cityName);
   }
 
 }
@@ -177,6 +184,7 @@ function buttonOnClick() {
     if (cityName !== "") {
 
       getWeather(cityName);
+      addButton(cityName);
 
       $("#search-input").val('');
     } else {
@@ -187,6 +195,20 @@ function buttonOnClick() {
 
 }
 
+//Loading from local storage
+function loadingFromLS() {
+  let historyBtnName;
+  for (let i = 0; i < 10; i++) {
+
+    historyBtnName = localStorage.getItem(i);
+
+    if (historyBtnName != null) {
+      addButton(historyBtnName)
+    }
+  }
+}
+
 $(document).ready(() => {
   buttonOnClick()
+  loadingFromLS()
 });
